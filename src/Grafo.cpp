@@ -119,10 +119,10 @@ void Grafo::loadGrafoOMP(const std::string& nomeArquivo, bool direcionado) {
     // Adicionar as arestas ao grafo
     #pragma omp parallel for
     for (size_t i = 0; i < arestas.size(); ++i) {
-        auto [o, d] = arestas[i];
-        adicionaAresta(o, d);
+        std::pair<uint32_t, uint32_t> a = arestas[i];
+        adicionaAresta(a.first, a.second);
         if (!direcionado) {
-            adicionaAresta(d, o);
+            adicionaAresta(a.second, a.first);
         }
     }
 
